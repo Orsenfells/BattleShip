@@ -1,6 +1,6 @@
 const createShipPositions = (shipLength) => {
     let positions = []
-    for ( let i = 1; i < shipLength; i++ ) {
+    for ( let i = 1; i <= shipLength; i++ ) {
         positions.push( { position: i, isHit: false } )
     }
     return positions
@@ -12,14 +12,27 @@ function ship(length) {
                         isSunk: false,
                         positions: createShipPositions(length),
                     }
-    const hit = ( index ) => {
-         let hit = shipData.find( key => key.position === index )
-         hit.isHit = true
+    const getShipPosition = ( position ) => {
+        return shipState.positions.find( obj => obj.position === position )
+    }
+    const hit = ( position ) => {
+        let hit = getShipPosition( position )
+        hit.isHit = true;
+    }
+    const isSunk = () => {
+        let hits = 0;
+        let positions = shipState.positions;
+        for ( let position of positions ) {
+            if (position.isHit) {
+                hits += 1
+            } else break;
+        }
+        return hits === length ? true : false
     }
     const status = () => {
-        return shipData
+        return shipState
     }
-    return { hit, status }
+    return { hit, status, isSunk }
 }
 
 module.exports = ship
