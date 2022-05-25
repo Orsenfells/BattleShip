@@ -1,9 +1,6 @@
 //ships will  be objects that include their length, where they've been hit and whether
 // or not they've been sunk
-
-const ship = require('./ship');
-
-
+const ship = require('./ship')
 
 test('hit() takes a number and marks that position as hit', () => {
     let newShip = ship(3)
@@ -16,7 +13,6 @@ test('hit() takes a number and marks that position as hit', () => {
                                        {position: 3, isHit: false},
                                     ])
 })
-
 test('isSunk() reports true, when all positions are hit', () => {
     let testShip = ship(3)
     testShip.hit(1)
@@ -24,4 +20,9 @@ test('isSunk() reports true, when all positions are hit', () => {
     testShip.hit(3)
 
     expect(testShip.isSunk()).toBe(true)
+})
+test('isSunk() reports false, if one position is not hit', () => {
+    let testShip = ship(3)
+    testShip.hit(1)
+    expect(testShip.isSunk()).toBe(false)
 })

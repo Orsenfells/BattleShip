@@ -19,14 +19,18 @@ function ship(length) {
         let hit = getShipPosition( position )
         hit.isHit = true;
     }
-    const isSunk = () => {
-        let hits = 0;
+    const calculateHits = (hits) => {
         let positions = shipState.positions;
         for ( let position of positions ) {
             if (position.isHit) {
                 hits += 1
             } else break;
         }
+        return hits
+    }
+    const isSunk = () => {
+        let hits = 0;
+        hits = calculateHits(hits)
         return hits === length ? true : false
     }
     const status = () => {
@@ -35,4 +39,5 @@ function ship(length) {
     return { hit, status, isSunk }
 }
 
-module.exports = ship
+
+module.exports = ship 

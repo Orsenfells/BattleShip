@@ -1,4 +1,12 @@
+
 const gameboard = () => {
+
+    let state = {
+        occupied: []
+    }
+    const placeShip = (coordinates) => {
+
+    }
     const createBoard = () => {
         let array = ['A','B','C','D','E','F','G','H','I','J']
         let emptyArray = []
@@ -8,8 +16,11 @@ const gameboard = () => {
             }})
         return console.log(emptyArray)
     }
-    return { createBoard }
+
+
+    return { createBoard, placeShip }
 }
 let board = gameboard()
 board.createBoard()
+board.placeShip()
 module.exports = gameboard
