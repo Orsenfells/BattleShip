@@ -1,11 +1,11 @@
 {
   "name": "battleship",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "private": true,
   "scripts": {
     "test": "jest"
-
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/Orsenfells/BattleShip#readme",
   "devDependencies": {
-
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.0",
     "jest": "^28.1.0",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"

@@ -1,11 +1,13 @@
-
+import createShip from "./ship.js"
 const gameboard = () => {
 
     let state = {
         occupied: []
     }
     const placeShip = (coordinates) => {
-
+        let ship = createShip(coordinates.length)
+        state.occupied.push({coordinates, ship})
+        
     }
     const createBoard = () => {
         let array = ['A','B','C','D','E','F','G','H','I','J']
@@ -16,11 +18,15 @@ const gameboard = () => {
             }})
         return console.log(emptyArray)
     }
+    const getBoardState = () => {
+        return state
+    }
+    const receiveAttack = () => {
 
-
-    return { createBoard, placeShip }
+    }
+    return { createBoard, placeShip, getBoardState, receiveAttack }
 }
 let board = gameboard()
-board.createBoard()
-board.placeShip()
-module.exports = gameboard
+board.placeShip(['a4','b4','c4'])
+
+export default gameboard

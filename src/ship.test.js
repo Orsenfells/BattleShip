@@ -1,6 +1,6 @@
 //ships will  be objects that include their length, where they've been hit and whether
 // or not they've been sunk
-const ship = require('./ship')
+import ship from './ship'
 
 test('hit() takes a number and marks that position as hit', () => {
     let newShip = ship(3)
