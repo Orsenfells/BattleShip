@@ -34,7 +34,15 @@ const gameboard = () => {
         } else state.missedAttacks.push( attackCoordinates )
         // if (state.occupied)
     }
-    return { createBoard, placeShip, getBoardState, receiveAttack }
+    const hasRemainingShips = () => {
+        let occupied = state.occupied
+        for ( let i = 0; i < occupied.length; i++) {
+            if( !occupied[i].ship.isSunk() ) {
+                return true
+            }
+        } return false
+    }
+    return { createBoard, placeShip, getBoardState, receiveAttack, hasRemainingShips }
 }
 let board = gameboard()
 board.placeShip(['a4','b4','c4'])
