@@ -21,12 +21,21 @@ const gameboard = () => {
     const getBoardState = () => {
         return state
     }
-    const receiveAttack = () => {
-
+    const findResidingShip = (coordinates) => {
+        return state.occupied.find( object => object.coordinates.includes( coordinates ) )
+    }
+    const receiveAttack = (attackCoordinates) => {
+        let ship = findResidingShip(attackCoordinates)
+        let position = ship.coordinates.indexOf(attackCoordinates) + 1
+        if(ship) {
+            ship.ship.hit(position)
+        } else console.log('no')
+        // if (state.occupied)
     }
     return { createBoard, placeShip, getBoardState, receiveAttack }
 }
 let board = gameboard()
 board.placeShip(['a4','b4','c4'])
-
+board.placeShip(['d4','e4','f4'])
+board.receiveAttack('d4')
 export default gameboard
