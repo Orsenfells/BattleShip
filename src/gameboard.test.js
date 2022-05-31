@@ -37,4 +37,15 @@ test('receiveAttack sends the hit function to the correct ship if a ship is hit'
                             {position: 3, isHit: false},
                         ])
 })
-test.todo('keeps track os missed attacks so they display properly')
+test('receivedAttack keeps track of missed attacks ', () => {
+    // Arrange 
+    let board = gameboard()
+    board.placeShip( [ 'A4','B4','C4' ])
+
+    // Act 
+    board.receiveAttack('D4')
+    let missedAttacks = board.getBoardState().missedAttacks
+
+    //Assert
+    expect(missedAttacks).toEqual(['D4'])
+})

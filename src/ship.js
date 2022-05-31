@@ -31,7 +31,8 @@ function ship(length) {
     const isSunk = () => {
         let hits = 0;
         hits = calculateHits(hits)
-        return hits === length ? true : false
+        hits === length ? shipState.isSunk = true : shipState.isSunk =  false
+        return shipState.isSunk
     }
     const status = () => {
         return shipState

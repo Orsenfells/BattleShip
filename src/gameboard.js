@@ -2,7 +2,8 @@ import createShip from "./ship.js"
 const gameboard = () => {
 
     let state = {
-        occupied: []
+        occupied: [],
+        missedAttacks: []
     }
     const placeShip = (coordinates) => {
         let ship = createShip(coordinates.length)
@@ -16,20 +17,21 @@ const gameboard = () => {
             for ( let i = 1; i <= array.length; i++ ) {
                 emptyArray.push(item + i)
             }})
-        return console.log(emptyArray)
+        return console.log( emptyArray )
     }
     const getBoardState = () => {
         return state
     }
-    const findResidingShip = (coordinates) => {
+    const findResidingShip = ( coordinates ) => {
         return state.occupied.find( object => object.coordinates.includes( coordinates ) )
     }
-    const receiveAttack = (attackCoordinates) => {
-        let ship = findResidingShip(attackCoordinates)
-        let position = ship.coordinates.indexOf(attackCoordinates) + 1
+    const receiveAttack = ( attackCoordinates ) => {
+        let ship = findResidingShip( attackCoordinates )
+        
         if(ship) {
-            ship.ship.hit(position)
-        } else console.log('no')
+            let position = ship.coordinates.indexOf( attackCoordinates ) + 1
+            ship.ship.hit( position )
+        } else state.missedAttacks.push( attackCoordinates )
         // if (state.occupied)
     }
     return { createBoard, placeShip, getBoardState, receiveAttack }
