@@ -46,3 +46,6 @@ tdd "rules"
         
     }
     ]
+
+
+    ship doesnt care what its position is only gameboard cares

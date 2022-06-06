@@ -3,7 +3,9 @@ const gameboard = () => {
 
     let state = {
         occupied: [],
-        missedAttacks: []
+        missedAttacks: [],
+        directHits: [],
+        board: []
     }
     const placeShip = (coordinates) => {
         let ship = createShip(coordinates.length)
@@ -12,12 +14,21 @@ const gameboard = () => {
     }
     const createBoard = () => {
         let array = ['A','B','C','D','E','F','G','H','I','J']
-        let emptyArray = []
+        
         array.forEach( item => {
             for ( let i = 1; i <= array.length; i++ ) {
-                emptyArray.push(item + i)
+                state.board.push(item + i)
             }})
-        return console.log( emptyArray )
+        
+    }
+    const getBoard = () => {
+        let board = state.board
+        return board
+    }
+    const getHitTiles = () => {
+        let missedAttacks = state.missedAttacks
+        let directHits = state.directHits
+        return { missedAttacks, directHits }
     }
     const getBoardState = () => {
         return state
@@ -31,6 +42,7 @@ const gameboard = () => {
         if(ship) {
             let position = ship.coordinates.indexOf( attackCoordinates ) + 1
             ship.ship.hit( position )
+            state.directHits.push( attackCoordinates )
         } else state.missedAttacks.push( attackCoordinates )
         // if (state.occupied)
     }
@@ -42,10 +54,19 @@ const gameboard = () => {
             }
         } return false
     }
-    return { createBoard, placeShip, getBoardState, receiveAttack, hasRemainingShips }
+    return { 
+                createBoard, 
+                placeShip, 
+                getBoardState, 
+                receiveAttack, 
+                hasRemainingShips, 
+                getHitTiles, 
+                getBoard
+            }
 }
 let board = gameboard()
 board.placeShip(['a4','b4','c4'])
 board.placeShip(['d4','e4','f4'])
 board.receiveAttack('d4')
+board.createBoard()
 export default gameboard
