@@ -14,4 +14,16 @@ test('players can send a command to attack the enemy board', () => {
     expect(mockboard.receiveAttack).toHaveBeenCalledWith("A4")
 
 })
-test.todo('computers can send a random attack to the enemy board')
+test('computers can send a random attack to the enemy board', () => {
+    let testPlayer = player( 'George' )
+    let mockMethod = jest.fn()
+    let mockMoves = jest.fn()
+    mockMoves.mockReturnValueOnce(['A1', 'B1'])
+    gameboard.mockImplementation( () => {
+        return { receiveAttack: mockMethod, getLegalMoves: mockMoves}
+    })
+    const mockboard = gameboard()
+
+    testPlayer.sendRandomAttack(mockboard)
+    expect(mockboard.receiveAttack).toHaveBeenCalled()
+})

@@ -7,10 +7,13 @@ const player = (name, isComputer) => {
     const sendAttack = (coordinate, board) => {
         board.receiveAttack(coordinate)
     }
-    const sendRandomAttack = () => {
-        
+    
+    const sendRandomAttack = (board) => {
+        let legalMoves = board.getLegalMoves(); 
+        let randomCoordinate =  legalMoves[Math.floor(Math.random() * legalMoves.length)]
+        board.receiveAttack(randomCoordinate)
     }
-    return { sendAttack }
+    return { sendAttack, sendRandomAttack}
 }
 
 export default player

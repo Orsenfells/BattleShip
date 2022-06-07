@@ -22,8 +22,19 @@ const gameboard = () => {
         
     }
     const getBoard = () => {
-        let board = state.board
-        return board
+        let gameboard = state.board
+
+        return  gameboard 
+    }
+    const getLegalMoves = () => {
+        let missed = state.missedAttacks
+        let hit = state.directHits
+        let arr = state.board.filter( coord => {
+            if( missed.includes( coord ) || hit.includes( coord ) ) {
+                return false
+            } return true
+        }) 
+        return arr
     }
     const getHitTiles = () => {
         let missedAttacks = state.missedAttacks
@@ -54,19 +65,20 @@ const gameboard = () => {
             }
         } return false
     }
-    return { 
-                createBoard, 
+    createBoard()
+    return {     
                 placeShip, 
                 getBoardState, 
                 receiveAttack, 
                 hasRemainingShips, 
                 getHitTiles, 
-                getBoard
+                getBoard,
+                getLegalMoves
             }
 }
-let board = gameboard()
-board.placeShip(['a4','b4','c4'])
-board.placeShip(['d4','e4','f4'])
-board.receiveAttack('d4')
-board.createBoard()
+// let board = gameboard()
+// board.placeShip(['a4','b4','c4'])
+// board.placeShip(['d4','e4','f4'])
+// board.receiveAttack('d4')
+// console.log(board.getBoard())
 export default gameboard

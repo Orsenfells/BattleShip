@@ -92,7 +92,7 @@ test('hasRemainingShips checks state.occupied for any remaining ships that have 
 // incoming query message
 test('getboard returns all the coordinates of the gameboard', () => {
     let board = gameboard()
-    board.createBoard()
+    // board.createBoard()
     let array = ['A','B','C','D','E','F','G','H','I','J']
     let expectedBoard = []
     array.forEach( item => {
@@ -100,4 +100,14 @@ test('getboard returns all the coordinates of the gameboard', () => {
             expectedBoard.push(item + i)
         }})
     expect(board.getBoard()).toEqual(expectedBoard)
+})
+// incoming query message
+test('getLegalMoves returns all the legal moves left to make on a board', () => {
+    let board = gameboard()
+    // board.createBoard()
+    board.receiveAttack('A4')
+    board.receiveAttack('B3')
+    let mockBoard = board.getBoard().filter( coord => coord !=='A4' && coord !== 'B3' )
+    
+    expect(board.getLegalMoves()).toEqual(mockBoard)
 })
